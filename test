@@ -1,0 +1,1859 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+void table(int totalcard, int line1[3], int line2[3], int line3[3], int line4[3], int yours[10], int ai1s[10], int ai2s[10], int ai3s[10]);
+void yourturn(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g);
+void ai1sturn(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g);
+void ai2sturn(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g);
+void ai3sturn(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g);
+void order1(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g);
+void order2(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g);
+void order3(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g);
+void order4(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g);
+
+void table(int totalcard, int line1[3], int line2[3], int line3[3], int line4[3], int yours[10], int ai1s[10], int ai2s[10], int ai3s[10]) //show the cards in the table
+{
+	cout << "There are " << totalcard << " cards." << endl;
+	cout << "Line1: ";
+
+	for (int i = 0; i < 3; i++)
+	{
+		if (line1[i] == 1) { cout << "Red"; }
+		if (line1[i] == 2) { cout << "Yellow"; }
+		if (line1[i] == 3) { cout << "Pink"; }
+		if (line1[i] == 4) { cout << "Gray."; }
+		if (line1[i] == 5) { cout << "Green"; }
+		if (line1[i] == 6) { cout << "Brown"; }
+		if (line1[i] == 7) { cout << "Blue"; }
+		if (line1[i] == 8) { cout << "+2"; }
+		if (line1[i] == 9) { cout << "Rainbow"; }
+		if (line1[i] == -1) { cout << " "; }
+		if (i == 2) { cout << endl; }
+	} //color of cards in line1
+
+	cout << "Line2: ";
+	for (int i = 0; i < 3; i++)
+	{
+		if (line2[i] == 1) { cout << "Red"; }
+		if (line2[i] == 2) { cout << "Yellow"; }
+		if (line2[i] == 3) { cout << "Pink"; }
+		if (line2[i] == 4) { cout << "Gray."; }
+		if (line2[i] == 5) { cout << "Green"; }
+		if (line2[i] == 6) { cout << "Brown"; }
+		if (line2[i] == 7) { cout << "Blue"; }
+		if (line2[i] == 8) { cout << "+2"; }
+		if (line2[i] == 9) { cout << "Rainbow"; }
+		if (line2[i] == -1) { cout << " "; }
+		if (i == 2) { cout << endl; }
+	} //color of cards in line2
+
+	cout << "Line3: ";
+	for (int i = 0; i < 3; i++)
+	{
+		if (line3[i] == 1) { cout << "Red"; }
+		if (line3[i] == 2) { cout << "Yellow"; }
+		if (line3[i] == 3) { cout << "Pink"; }
+		if (line3[i] == 4) { cout << "Gray."; }
+		if (line3[i] == 5) { cout << "Green"; }
+		if (line3[i] == 6) { cout << "Brown"; }
+		if (line3[i] == 7) { cout << "Blue"; }
+		if (line3[i] == 8) { cout << "+2"; }
+		if (line3[i] == 9) { cout << "Rainbow"; }
+		if (line3[i] == -1) { cout << " "; }
+		if (i == 2) { cout << endl; }
+	} //color of cards in line3
+
+	cout << "Line4: ";
+	for (int i = 0; i < 3; i++)
+	{
+		if (line4[i] == 1) { cout << "Red"; }
+		if (line4[i] == 2) { cout << "Yellow"; }
+		if (line4[i] == 3) { cout << "Pink"; }
+		if (line4[i] == 4) { cout << "Gray."; }
+		if (line4[i] == 5) { cout << "Green"; }
+		if (line4[i] == 6) { cout << "Brown"; }
+		if (line4[i] == 7) { cout << "Blue"; }
+		if (line4[i] == 8) { cout << "+2"; }
+		if (line4[i] == 9) { cout << "Rainbow"; }
+		if (line4[i] == -1) { cout << " "; }
+		if (i == 2) { cout << endl; }
+	} //color of cards in line4
+
+	cout << "  Your card: Red: " << yours[1] << " Yellow: " << yours[2] << " Pink: " << yours[3] << " Gray: " << yours[4] << " Green: " << yours[5] << " Brown: " << yours[6] << " Blue: " << yours[7] << " +2: " << yours[8] << " Rainbow " << yours[9] << endl;
+	cout << " AI1's card: Red: " << ai1s[1] << " Yellow: " << ai1s[2] << " Pink: " << ai1s[3] << " Gray: " << ai1s[4] << " Green: " << ai1s[5] << " Brown: " << ai1s[6] << " Blue: " << ai1s[7] << " +2: " << ai1s[8] << " Rainbow " << ai1s[9] << endl;
+	cout << " AI2's card: Red: " << ai2s[1] << " Yellow: " << ai2s[2] << " Pink: " << ai2s[3] << " Gray: " << ai2s[4] << " Green: " << ai2s[5] << " Brown: " << ai2s[6] << " Blue: " << ai2s[7] << " +2: " << ai2s[8] << " Rainbow " << ai2s[9] << endl;
+	cout << " AI3's card: Red: " << ai3s[1] << " Yellow: " << ai3s[2] << " Pink: " << ai3s[3] << " Gray: " << ai3s[4] << " Green: " << ai3s[5] << " Brown: " << ai3s[6] << " Blue: " << ai3s[7] << " +2: " << ai3s[8] << " Rainbow " << ai3s[9] << endl;
+	cout << endl;
+}
+
+
+void yourturn(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g)
+{
+	while (youfinish == 0) //you have not finished your move
+	{
+
+		table(totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s); //show the table 
+
+		cout << "Enter 1 to flip one card or 2 to get back one line of cards :";
+		char move;
+		cin >> move;
+
+		if (move == '1') //1 to flip one card and put into a line
+		{
+			if (line1[2] != 0 && line2[2] != 0 && line3[2] != 0 && line4[2] != 0) //no space to put a card into lines //all line has at most 3 cards
+			{
+				cout << "Oops. You can only get a line back this time." << endl;
+				continue;
+			}
+
+			else //have space to put a card into lines
+			{
+				get = -1;
+				while (get == -1)
+				{
+					srand(time(0));
+					g = rand() % 76; //flip one card in 76 cards
+					get = cardgroup[g];
+				}
+				cardgroup[g] = -1; //has been flipped
+
+				cout << "You get: ";
+				if (get == 1) { cout << "Red"; }
+				if (get == 2) { cout << "Yellow"; }
+				if (get == 3) { cout << "Pink"; }
+				if (get == 4) { cout << "Gray."; }
+				if (get == 5) { cout << "Green"; }
+				if (get == 6) { cout << "Brown"; }
+				if (get == 7) { cout << "Blue"; }
+				if (get == 8) { cout << "+2"; }
+				if (get == 9) { cout << "Rainbow"; }
+				cout << endl;
+
+				totalcard--;
+				if (totalcard == 15)
+				{
+					cout << "The game will end in this round." << endl << endl;
+					end = 1;
+				}
+
+
+				put = 0;
+
+				while (put == 0)
+				{
+					cout << "Enter 1 - 4 to put it into the related line" << endl;
+					cin >> t;
+					if (t == '1')
+					{
+						if (line1[2] == -1) //-1 means already be get back
+						{
+							cout << "Line1: Already be get back." << endl;
+							continue;
+						}
+
+						else if (line1[2] != 0) //not 0 means has card 
+						{
+							cout << "Line1: Already 3 cards. Full." << endl;
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line1[i] == 0)
+							{
+								line1[i] = get; //get = 1-9 relate to 9 types of cards
+								put = 1;
+								break;
+							}
+						}
+					}
+
+					else if (t == '2')
+					{
+						if (line2[2] == -1)
+						{
+							cout << "Line2: Already be get back." << endl;
+							continue;
+						}
+
+						else if (line2[2] != 0)
+						{
+							cout << "Line2: Already 3 cards. Full." << endl;
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line2[i] == 0)
+							{
+								line2[i] = get;
+								put = 1;
+								break;
+							}
+						}
+					}
+
+					else if (t == '3')
+					{
+						if (line3[2] == -1)
+						{
+							cout << "Line3: Already be get back." << endl;
+							continue;
+						}
+
+						else if (line3[2] != 0)
+						{
+							cout << "Line3: Already 3 cards. Full." << endl;
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line3[i] == 0)
+							{
+								line3[i] = get;
+								put = 1;
+								break;
+							}
+						}
+					}
+
+					else if (t == '4')
+					{
+						if (line4[2] == -1)
+						{
+							cout << "Line4: Already be get back." << endl;
+							continue;
+						}
+
+						else if (line4[2] != 0)
+						{
+							cout << "Line4: Already 3 cards. Full." << endl;
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line4[i] == 0)
+							{
+								line4[i] = get;
+								put = 1;
+								break;
+							}
+						}
+					}
+
+					else
+					{
+						cout << "Wrong input." << endl;
+						continue;
+					}
+
+					table(totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s); //show cards on the table
+				}
+				break;
+			}
+		}
+
+		else if (move == '2')
+		{
+			if ((line1[0] == 0 || line1[0] == -1) && (line2[0] == 0 || line2[0] == -1) && (line3[0] == 0 || line3[0] == -1) && (line4[0] == 0 || line4[0] == -1)) //(0,0,0,0 || -1,0,0,0 || -1,-1,0,0 || -1,-1,-1,0)
+			{
+				cout << "No cards in lines.";
+				continue;
+			}
+
+			take = 0;
+			while (take == 0) //can get back a line of cards
+			{
+				cout << "Enter 1-4 to get back the related line: " << endl;
+				cin >> e;
+
+				if (e == '1')
+				{
+					if (line1[2] == -1)
+					{
+						cout << "Line1: Already be get back." << endl;
+						continue;
+					}
+
+					else if (line1[0] == 0)
+					{
+						cout << "Line1: Empty." << endl;
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line1[i] == 1) { yours[1]++; }
+							if (line1[i] == 2) { yours[2]++; }
+							if (line1[i] == 3) { yours[3]++; }
+							if (line1[i] == 4) { yours[4]++; }
+							if (line1[i] == 5) { yours[5]++; }
+							if (line1[i] == 6) { yours[6]++; }
+							if (line1[i] == 7) { yours[7]++; }
+							if (line1[i] == 8) { yours[8]++; }
+							if (line1[i] == 9) { yours[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line1[i] = -1; // already be get back
+						}
+					}
+				}
+
+				else if (e == '2')
+				{
+					if (line2[2] == -1)
+					{
+						cout << "Line2: Already be get back." << endl;
+						continue;
+					}
+
+					else if (line2[0] == 0)
+					{
+						cout << "Line2: Empty." << endl;
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line2[i] == 1) { yours[1]++; }
+							if (line2[i] == 2) { yours[2]++; }
+							if (line2[i] == 3) { yours[3]++; }
+							if (line2[i] == 4) { yours[4]++; }
+							if (line2[i] == 5) { yours[5]++; }
+							if (line2[i] == 6) { yours[6]++; }
+							if (line2[i] == 7) { yours[7]++; }
+							if (line2[i] == 8) { yours[8]++; }
+							if (line2[i] == 9) { yours[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line2[i] = -1;
+						}
+					}
+				}
+
+				else if (e == '3')
+				{
+					if (line3[2] == -1)
+					{
+						cout << "Line3: Already be get back." << endl;
+						continue;
+					}
+
+					else if (line3[0] == 0)
+					{
+						cout << "Line3: Empty." << endl;
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line3[i] == 1) { yours[1]++; }
+							if (line3[i] == 2) { yours[2]++; }
+							if (line3[i] == 3) { yours[3]++; }
+							if (line3[i] == 4) { yours[4]++; }
+							if (line3[i] == 5) { yours[5]++; }
+							if (line3[i] == 6) { yours[6]++; }
+							if (line3[i] == 7) { yours[7]++; }
+							if (line3[i] == 8) { yours[8]++; }
+							if (line3[i] == 9) { yours[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line3[i] = -1;
+						}
+					}
+				}
+
+				else if (e == '4')
+				{
+					if (line4[2] == -1)
+					{
+						cout << "Line4: Already be get back." << endl;
+						continue;
+					}
+
+					else if (line4[0] == 0)
+					{
+						cout << "Line4: Empty." << endl;
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line4[i] == 1) { yours[1]++; }
+							if (line4[i] == 2) { yours[2]++; }
+							if (line4[i] == 3) { yours[3]++; }
+							if (line4[i] == 4) { yours[4]++; }
+							if (line4[i] == 5) { yours[5]++; }
+							if (line4[i] == 6) { yours[6]++; }
+							if (line4[i] == 7) { yours[7]++; }
+							if (line4[i] == 8) { yours[8]++; }
+							if (line4[i] == 9) { yours[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line4[i] = -1;
+						}
+					}
+				}
+
+				else
+				{
+					cout << "Wrong input." << endl;
+					continue;
+				}
+
+				table(totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s);
+			}
+
+			youfinish = 1; // finish your move in this round
+
+			if (line1[0] == -1 && line2[0] == -1 && line3[0] == -1 && line4[0] == -1) //you are the last one who takes away a line of cards
+			{
+				firstone = 0;
+			}
+		}
+		else
+		{
+			cout << "Wrong input." << endl;
+			continue;
+		}
+	}
+}
+
+
+void ai1sturn(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g)
+{
+	while (ai1finish == 0)
+	{
+		srand(time(0));
+		int ai1move = rand() % 2 + 1;
+
+		if (ai1move == 1)
+		{
+			if (line1[2] != 0 && line2[2] != 0 && line3[2] != 0 && line4[2] != 0) //no space to put a card into lines
+			{
+				continue;
+			}
+
+			else //have space to put a card into lines
+			{
+				get = -1;
+				while (get == -1)
+				{
+					srand(time(0));
+					g = rand() % 76; //0-75
+					get = cardgroup[g];
+				}
+				cardgroup[g] = -1;
+
+				cout << "AI1 gets: ";
+
+				if (get == 1) { cout << "Red"; }
+				if (get == 2) { cout << "Yellow"; }
+				if (get == 3) { cout << "Pink"; }
+				if (get == 4) { cout << "Gray."; }
+				if (get == 5) { cout << "Green"; }
+				if (get == 6) { cout << "Brown"; }
+				if (get == 7) { cout << "Blue"; }
+				if (get == 8) { cout << "+2"; }
+				if (get == 9) { cout << "Rainbow"; }
+				cout << endl;
+
+				totalcard--;
+				if (totalcard == 15)
+				{
+					cout << "The game will end in this round." << endl << endl;
+					end = 1;
+				}
+
+
+				put = 0;
+
+				while (put == 0)
+				{
+					srand(time(0));
+					t = rand() % 4 + 1; //1-4 means the line ai1 wants to put //random
+					if (t == 1)
+					{
+						if (line1[2] == -1 || line1[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line1[i] == 0)
+							{
+								line1[i] = get;
+								put = 1;
+								cout << "AI1 puts the card into line1." << endl;
+								break;
+							}
+						}
+					}
+
+					if (t == 2)
+					{
+						if (line2[2] == -1 || line2[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line2[i] == 0)
+							{
+								line2[i] = get;
+								put = 1;
+								cout << "AI1 puts the card into line2." << endl;
+								break;
+							}
+						}
+					}
+
+					if (t == 3)
+					{
+						if (line3[2] == -1 || line3[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line3[i] == 0)
+							{
+								line3[i] = get;
+								put = 1;
+								cout << "AI1 puts the card into line3." << endl;
+								break;
+							}
+						}
+					}
+
+					if (t == 4)
+					{
+						if (line4[2] == -1 || line4[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line4[i] == 0)
+							{
+								line4[i] = get;
+								put = 1;
+								cout << "AI1 puts the card into line4." << endl;
+								break;
+							}
+						}
+					}
+				}
+				table(totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s); //show the table 
+				break;
+			}
+		}
+
+		else if (ai1move == 2)
+		{
+			if ((line1[0] == 0 || line1[0] == -1) && (line2[0] == 0 || line2[0] == -1) && (line3[0] == 0 || line3[0] == -1) && (line4[0] == 0 || line4[0] == -1)) //(0,0,0,0 || -1,0,0,0 || -1,-1,0,0 || -1,-1,-1,0)
+			{
+				continue;
+			}
+
+			take = 0;
+			while (take == 0) //can get back a line of cards
+			{
+				srand(time(0));
+				e = rand() % 4 + 1; //1-4 to get back the related line
+
+				if (e == 1)
+				{
+					if (line1[2] == -1 || line1[0] == 0)
+					{
+						continue;
+					}
+
+					else //get a line of cards
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line1[i] == 1) { ai1s[1]++; }
+							if (line1[i] == 2) { ai1s[2]++; }
+							if (line1[i] == 3) { ai1s[3]++; }
+							if (line1[i] == 4) { ai1s[4]++; }
+							if (line1[i] == 5) { ai1s[5]++; }
+							if (line1[i] == 6) { ai1s[6]++; }
+							if (line1[i] == 7) { ai1s[7]++; }
+							if (line1[i] == 8) { ai1s[8]++; }
+							if (line1[i] == 9) { ai1s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line1[i] = -1;
+						}
+
+						cout << "AI1 gets back line1." << endl;
+					}
+				}
+
+				if (e == 2)
+				{
+					if (line2[2] == -1 || line2[0] == 0)
+					{
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line2[i] == 1) { ai1s[1]++; }
+							if (line2[i] == 2) { ai1s[2]++; }
+							if (line2[i] == 3) { ai1s[3]++; }
+							if (line2[i] == 4) { ai1s[4]++; }
+							if (line2[i] == 5) { ai1s[5]++; }
+							if (line2[i] == 6) { ai1s[6]++; }
+							if (line2[i] == 7) { ai1s[7]++; }
+							if (line2[i] == 8) { ai1s[8]++; }
+							if (line2[i] == 9) { ai1s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line2[i] = -1;
+						}
+
+						cout << "AI1 gets back line2." << endl;
+					}
+				}
+
+				if (e == 3)
+				{
+					if (line3[2] == -1 || line3[0] == 0)
+					{
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line3[i] == 1) { ai1s[1]++; }
+							if (line3[i] == 2) { ai1s[2]++; }
+							if (line3[i] == 3) { ai1s[3]++; }
+							if (line3[i] == 4) { ai1s[4]++; }
+							if (line3[i] == 5) { ai1s[5]++; }
+							if (line3[i] == 6) { ai1s[6]++; }
+							if (line3[i] == 7) { ai1s[7]++; }
+							if (line3[i] == 8) { ai1s[8]++; }
+							if (line3[i] == 9) { ai1s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line3[i] = -1;
+						}
+
+						cout << "AI1 gets back line3." << endl;
+					}
+				}
+
+				if (e == 4)
+				{
+					if (line4[2] == -1 || line4[0] == 0)
+					{
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line4[i] == 1) { ai1s[1]++; }
+							if (line4[i] == 2) { ai1s[2]++; }
+							if (line4[i] == 3) { ai1s[3]++; }
+							if (line4[i] == 4) { ai1s[4]++; }
+							if (line4[i] == 5) { ai1s[5]++; }
+							if (line4[i] == 6) { ai1s[6]++; }
+							if (line4[i] == 7) { ai1s[7]++; }
+							if (line4[i] == 8) { ai1s[8]++; }
+							if (line4[i] == 9) { ai1s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line4[i] = -1;
+						}
+
+						cout << "AI1 gets back line4." << endl;
+					}
+				}
+				table(totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s); //show the table 
+			}
+
+
+			ai1finish = 1;
+
+			if (line1[0] == -1 && line2[0] == -1 && line3[0] == -1 && line4[0] == -1)
+			{
+				firstone = 1;
+			}
+		}
+	}
+}
+
+void ai2sturn(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g)
+{
+	while (ai2finish == 0)
+	{
+		srand(time(0));
+		int ai2move = rand() % 2 + 1;
+
+		if (ai2move == 1)
+		{
+			if (line1[2] != 0 && line2[2] != 0 && line3[2] != 0 && line4[2] != 0) //no space to put a card into lines
+			{
+				continue;
+			}
+
+			else //have space to put a card into lines
+			{
+				get = -1;
+				while (get == -1) //
+				{
+					srand(time(0));
+					g = rand() % 76; //0-75
+					get = cardgroup[g];
+				}
+				cardgroup[g] = -1;
+				cout << "AI2 gets: ";
+				if (get == 1) { cout << "Red"; }
+				if (get == 2) { cout << "Yellow"; }
+				if (get == 3) { cout << "Pink"; }
+				if (get == 4) { cout << "Gray."; }
+				if (get == 5) { cout << "Green"; }
+				if (get == 6) { cout << "Brown"; }
+				if (get == 7) { cout << "Blue"; }
+				if (get == 8) { cout << "+2"; }
+				if (get == 9) { cout << "Rainbow"; }
+				cout << endl;
+
+				totalcard--;
+				if (totalcard == 15)
+				{
+					cout << "The game will end in this round." << endl << endl;
+					end = 1;
+				}
+
+
+				put = 0;
+
+				while (put == 0)
+				{
+					srand(time(0));
+					t = rand() % 4 + 1; //1-4 means the line ai1 wants to put //random
+					if (t == 1)
+					{
+						if (line1[2] == -1 || line1[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line1[i] == 0)
+							{
+								line1[i] = get;
+								put = 1;
+								cout << "AI2 puts the card into line1." << endl;
+								break;
+							}
+						}
+					}
+
+					if (t == 2)
+					{
+						if (line2[2] == -1 || line2[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line2[i] == 0)
+							{
+								line2[i] = get;
+								put = 1;
+								cout << "AI2 puts the card into line2." << endl;
+								break;
+							}
+						}
+					}
+
+					if (t == 3)
+					{
+						if (line3[2] == -1 || line3[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line3[i] == 0)
+							{
+								line3[i] = get;
+								put = 1;
+								cout << "AI2 puts the card into line3." << endl;
+								break;
+							}
+						}
+					}
+
+					if (t == 4)
+					{
+						if (line4[2] == -1 || line4[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line4[i] == 0)
+							{
+								line4[i] = get;
+								put = 1;
+								cout << "AI2 puts the card into line4." << endl;
+								break;
+							}
+						}
+					}
+				}
+				table(totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s); //show the table 
+				break;
+			}
+		}
+
+		else if (ai2move == 2)
+		{
+			if ((line1[0] == 0 || line1[0] == -1) && (line2[0] == 0 || line2[0] == -1) && (line3[0] == 0 || line3[0] == -1) && (line4[0] == 0 || line4[0] == -1)) //(0,0,0,0 || -1,0,0,0 || -1,-1,0,0 || -1,-1,-1,0)
+			{
+				continue;
+			}
+
+			take = 0;
+			while (take == 0) //can get back a line of cards
+			{
+				srand(time(0));
+				e = rand() % 4 + 1; //1-4 to get back the related line
+
+				if (e == 1)
+				{
+					if (line1[2] == -1 || line1[0] == 0)
+					{
+						continue;
+					}
+
+					else //get a line of cards
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line1[i] == 1) { ai2s[1]++; }
+							if (line1[i] == 2) { ai2s[2]++; }
+							if (line1[i] == 3) { ai2s[3]++; }
+							if (line1[i] == 4) { ai2s[4]++; }
+							if (line1[i] == 5) { ai2s[5]++; }
+							if (line1[i] == 6) { ai2s[6]++; }
+							if (line1[i] == 7) { ai2s[7]++; }
+							if (line1[i] == 8) { ai2s[8]++; }
+							if (line1[i] == 9) { ai2s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line1[i] = -1;
+						}
+
+						cout << "AI2 gets back line1." << endl;
+					}
+				}
+
+				if (e == 2)
+				{
+					if (line2[2] == -1 || line2[0] == 0)
+					{
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line2[i] == 1) { ai2s[1]++; }
+							if (line2[i] == 2) { ai2s[2]++; }
+							if (line2[i] == 3) { ai2s[3]++; }
+							if (line2[i] == 4) { ai2s[4]++; }
+							if (line2[i] == 5) { ai2s[5]++; }
+							if (line2[i] == 6) { ai2s[6]++; }
+							if (line2[i] == 7) { ai2s[7]++; }
+							if (line2[i] == 8) { ai2s[8]++; }
+							if (line2[i] == 9) { ai2s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line2[i] = -1;
+						}
+
+						cout << "AI2 gets back line2." << endl;
+					}
+				}
+
+				if (e == 3)
+				{
+					if (line3[2] == -1 || line3[0] == 0)
+					{
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line3[i] == 1) { ai2s[1]++; }
+							if (line3[i] == 2) { ai2s[2]++; }
+							if (line3[i] == 3) { ai2s[3]++; }
+							if (line3[i] == 4) { ai2s[4]++; }
+							if (line3[i] == 5) { ai2s[5]++; }
+							if (line3[i] == 6) { ai2s[6]++; }
+							if (line3[i] == 7) { ai2s[7]++; }
+							if (line3[i] == 8) { ai2s[8]++; }
+							if (line3[i] == 9) { ai2s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line3[i] = -1;
+						}
+
+						cout << "AI2 gets back line3." << endl;
+					}
+				}
+
+				if (e == 4)
+				{
+					if (line4[2] == -1 || line4[0] == 0)
+					{
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line4[i] == 1) { ai2s[1]++; }
+							if (line4[i] == 2) { ai2s[2]++; }
+							if (line4[i] == 3) { ai2s[3]++; }
+							if (line4[i] == 4) { ai2s[4]++; }
+							if (line4[i] == 5) { ai2s[5]++; }
+							if (line4[i] == 6) { ai2s[6]++; }
+							if (line4[i] == 7) { ai2s[7]++; }
+							if (line4[i] == 8) { ai2s[8]++; }
+							if (line4[i] == 9) { ai2s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line4[i] = -1;
+						}
+
+						cout << "AI2 gets back line4." << endl;
+					}
+				}
+				table(totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s); //show the table 
+			}
+
+			ai2finish = 1;
+
+			if (line1[0] == -1 && line2[0] == -1 && line3[0] == -1 && line4[0] == -1)
+			{
+				firstone = 2;
+			}
+		}
+	}
+}
+
+void ai3sturn(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g)
+{
+	while (ai3finish == 0)
+	{
+		srand(time(0));
+		int ai3move = rand() % 2 + 1;
+
+		if (ai3move == 1)
+		{
+			if (line1[2] != 0 && line2[2] != 0 && line3[2] != 0 && line4[2] != 0) //no space to put a card into lines
+			{
+				continue;
+			}
+
+			else //have space to put a card into lines
+			{
+				get = -1;
+				while (get == -1) //
+				{
+					srand(time(0));
+					g = rand() % 76; //0-75
+					get = cardgroup[g];
+				}
+				cardgroup[g] = -1;
+				cout << "AI3 gets: ";
+				if (get == 1) { cout << "Red"; }
+				if (get == 2) { cout << "Yellow"; }
+				if (get == 3) { cout << "Pink"; }
+				if (get == 4) { cout << "Gray."; }
+				if (get == 5) { cout << "Green"; }
+				if (get == 6) { cout << "Brown"; }
+				if (get == 7) { cout << "Blue"; }
+				if (get == 8) { cout << "+2"; }
+				if (get == 9) { cout << "Rainbow"; }
+				cout << endl;
+
+				totalcard--;
+				if (totalcard == 15)
+				{
+					cout << "The game will end in this round." << endl << endl;
+					end = 1;
+				}
+
+
+				put = 0;
+
+				while (put == 0)
+				{
+					srand(time(0));
+					t = rand() % 4 + 1; //1-4 means the line ai1 wants to put //random
+					if (t == 1)
+					{
+						if (line1[2] == -1 || line1[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line1[i] == 0)
+							{
+								line1[i] = get;
+								put = 1;
+								cout << "AI3 puts the card into line1.";
+								break;
+							}
+						}
+					}
+
+					if (t == 2)
+					{
+						if (line2[2] == -1 || line2[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line2[i] == 0)
+							{
+								line2[i] = get;
+								put = 1;
+								cout << "AI3 puts the card into line2.";
+								break;
+							}
+						}
+					}
+
+					if (t == 3)
+					{
+						if (line3[2] == -1 || line3[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line3[i] == 0)
+							{
+								line3[i] = get;
+								put = 1;
+								cout << "AI3 puts the card into line3.";
+								break;
+							}
+						}
+					}
+
+					if (t == 4)
+					{
+						if (line4[2] == -1 || line4[2] != 0)
+						{
+							continue;
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							if (line4[i] == 0)
+							{
+								line4[i] = get;
+								put = 1;
+								cout << "AI3 puts the card into line4.";
+								break;
+							}
+						}
+					}
+				}
+				table(totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s); //show the table 
+				break;
+			}
+		}
+
+		else if (ai3move == 2)
+		{
+			if ((line1[0] == 0 || line1[0] == -1) && (line2[0] == 0 || line2[0] == -1) && (line3[0] == 0 || line3[0] == -1) && (line4[0] == 0 || line4[0] == -1)) //(0,0,0,0 || -1,0,0,0 || -1,-1,0,0 || -1,-1,-1,0)
+			{
+				continue;
+			}
+
+			take = 0;
+			while (take == 0) //can get back a line of cards
+			{
+				srand(time(0));
+				e = rand() % 4 + 1; //1-4 to get back the related line
+
+				if (e == 1)
+				{
+					if (line1[2] == -1 || line1[0] == 0)
+					{
+						continue;
+					}
+
+					else //get a line of cards
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line1[i] == 1) { ai3s[1]++; }
+							if (line1[i] == 2) { ai3s[2]++; }
+							if (line1[i] == 3) { ai3s[3]++; }
+							if (line1[i] == 4) { ai3s[4]++; }
+							if (line1[i] == 5) { ai3s[5]++; }
+							if (line1[i] == 6) { ai3s[6]++; }
+							if (line1[i] == 7) { ai3s[7]++; }
+							if (line1[i] == 8) { ai3s[8]++; }
+							if (line1[i] == 9) { ai3s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line1[i] = -1;
+						}
+
+						cout << "AI3 gets back line1.";
+					}
+				}
+
+				if (e == 2)
+				{
+					if (line2[2] == -1 || line2[0] == 0)
+					{
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line2[i] == 1) { ai3s[1]++; }
+							if (line2[i] == 2) { ai3s[2]++; }
+							if (line2[i] == 3) { ai3s[3]++; }
+							if (line2[i] == 4) { ai3s[4]++; }
+							if (line2[i] == 5) { ai3s[5]++; }
+							if (line2[i] == 6) { ai3s[6]++; }
+							if (line2[i] == 7) { ai3s[7]++; }
+							if (line2[i] == 8) { ai3s[8]++; }
+							if (line2[i] == 9) { ai3s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line2[i] = -1;
+						}
+
+						cout << "AI3 gets back line2.";
+					}
+				}
+
+				if (e == 3)
+				{
+					if (line3[2] == -1 || line3[0] == 0)
+					{
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line3[i] == 1) { ai3s[1]++; }
+							if (line3[i] == 2) { ai3s[2]++; }
+							if (line3[i] == 3) { ai3s[3]++; }
+							if (line3[i] == 4) { ai3s[4]++; }
+							if (line3[i] == 5) { ai3s[5]++; }
+							if (line3[i] == 6) { ai3s[6]++; }
+							if (line3[i] == 7) { ai3s[7]++; }
+							if (line3[i] == 8) { ai3s[8]++; }
+							if (line3[i] == 9) { ai3s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line3[i] = -1;
+						}
+
+						cout << "AI3 gets back line3.";
+					}
+				}
+
+				if (e == 4)
+				{
+					if (line4[2] == -1 || line4[0] == 0)
+					{
+						continue;
+					}
+
+					else
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							if (i == 2)
+							{
+								take = 1;
+							}
+
+							if (line4[i] == 1) { ai3s[1]++; }
+							if (line4[i] == 2) { ai3s[2]++; }
+							if (line4[i] == 3) { ai3s[3]++; }
+							if (line4[i] == 4) { ai3s[4]++; }
+							if (line4[i] == 5) { ai3s[5]++; }
+							if (line4[i] == 6) { ai3s[6]++; }
+							if (line4[i] == 7) { ai3s[7]++; }
+							if (line4[i] == 8) { ai3s[8]++; }
+							if (line4[i] == 9) { ai3s[9]++; }
+						}
+
+						for (int i = 0; i < 3; i++)
+						{
+							line4[i] = -1;
+						}
+
+						cout << "AI3 gets back line4.";
+					}
+				}
+				table(totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s); //show the table 
+			}
+
+			ai3finish = 1;
+
+			if (line1[0] == -1 && line2[0] == -1 && line3[0] == -1 && line4[0] == -1)
+			{
+				firstone = 3;
+			}
+		}
+	}
+}
+
+void order1(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g)
+{
+	yourturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	ai1sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	ai2sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	ai3sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+}
+
+void order2(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g)
+{
+	ai1sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	ai2sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	ai3sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	yourturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+}
+
+void order3(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g)
+{
+	ai2sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	ai3sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	yourturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	ai1sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+}
+
+void order4(int& firstone, int& totalcard, int(&line1)[3], int(&line2)[3], int(&line3)[3], int(&line4)[3], int(&yours)[10], int(&ai1s)[10], int(&ai2s)[10], int(&ai3s)[10], int(&cardgroup)[76], int& end, int& youfinish, int& ai1finish, int& ai2finish, int& ai3finish, int& take, char& e, int& gamestatus, char& t, int& put, int& get, int& g)
+{
+	ai3sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	yourturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	ai1sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+	ai2sturn(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+}
+
+int main()
+{
+
+	int cardgroup[76] = { 1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,9,9,9 }; //card group: 1-7: single color*7, 8: +2, 9: rainbow
+
+	int line1[3] = { 0 };
+	int line2[3] = { 0 };
+	int line3[3] = { 0 };
+	int line4[3] = { 0 }; //there are at most 3 cards in a line 
+
+	int yours[10] = { 0 };
+	int ai1s[10] = { 0 };
+	int ai2s[10] = { 0 };
+	int ai3s[10] = { 0 }; //the type of cards players may get
+
+	int begin = 0, begin1 = 0, begin2 = 0, begin3 = 0;
+
+	int round = 0;
+	int a, b, c, d;
+	int totalcard = 76; //total of cards
+	int end = 0; //whether the card which make the game end be flipped
+	int youfinish = 0, ai1finish = 0, ai2finish = 0, ai3finish = 0; //whether get a line back //0: not yet
+	int take;
+	char e;
+	int gamestatus = 0; //whether the game will finish
+	char t;
+	int put = 0;
+	int get = -1;
+	int g;
+	int firstone; //the one who start to move in a new round
+	int winner = 1, max;
+	int point[9] = { 0 };
+	int score = 0;
+
+	cout << "Welcome to Coloretto!" << endl;
+	cout << "Rules:" << endl;
+	cout << "Everyone would get a random and different color of card in the beginning." << endl;
+	cout << "Starts with 4 lines." << endl;
+	cout << "You could choose to flip a card and put it into a line or get back a line of cards." << endl;
+	cout << "Notice: there are at most 3 cards in a line." << endl;
+	cout << "Notice: you can get back cards only when there is at least 1 card in the line." << endl << endl;
+
+	while ((begin == begin1) || (begin == begin2) || (begin == begin3) || (begin1 == begin2) || (begin1 == begin3) || (begin2 == begin3))
+	{
+		srand(time(0));
+
+		for (int i = 1; i < 8; i++)
+		{
+			yours[i] = { 0 };
+			ai1s[i] = { 0 };
+			ai2s[i] = { 0 };
+			ai3s[i] = { 0 };
+		}
+
+
+	again:
+		a = rand() % 76;
+		begin = cardgroup[a];
+
+		while ((begin == 8) || (begin == 9))
+		{
+			a = -1;
+			begin = 0;
+			goto again;
+		}
+		if (begin == 1) { yours[1] ++; }
+		if (begin == 2) { yours[2] ++; }
+		if (begin == 3) { yours[3] ++; }
+		if (begin == 4) { yours[4] ++; }
+		if (begin == 5) { yours[5] ++; }
+		if (begin == 6) { yours[6] ++; }
+		if (begin == 7) { yours[7] ++; }
+
+
+
+	again1:
+		b = rand() % 76;
+		begin1 = cardgroup[b];
+
+		if ((begin1 == 8) || (begin1 == 9))
+		{
+			b = -1;
+			begin1 = 0;
+			goto again1;
+		}
+		if (begin1 == 1) { ai1s[1] ++; }
+		if (begin1 == 2) { ai1s[2] ++; }
+		if (begin1 == 3) { ai1s[3] ++; }
+		if (begin1 == 4) { ai1s[4] ++; }
+		if (begin1 == 5) { ai1s[5] ++; }
+		if (begin1 == 6) { ai1s[6] ++; }
+		if (begin1 == 7) { ai1s[7] ++; }
+
+
+
+	again2:
+		c = rand() % 76;
+		begin2 = cardgroup[c];
+
+		if ((begin2 == 8) || (begin2 == 9))
+		{
+			c = -1;
+			begin2 = 0;
+			goto again2;
+		}
+		if (begin2 == 1) { ai2s[1] ++; }
+		if (begin2 == 2) { ai2s[2] ++; }
+		if (begin2 == 3) { ai2s[3] ++; }
+		if (begin2 == 4) { ai2s[4] ++; }
+		if (begin2 == 5) { ai2s[5] ++; }
+		if (begin2 == 6) { ai2s[6] ++; }
+		if (begin2 == 7) { ai2s[7] ++; }
+
+
+
+	again3:
+		d = rand() % 76;
+		begin3 = cardgroup[d];
+
+		if ((begin3 == 8) || (begin3 == 9))
+		{
+			d = -1;
+			begin3 = 0;
+			goto again3;
+		}
+		if (begin3 == 1) { ai3s[1] ++; }
+		if (begin3 == 2) { ai3s[2] ++; }
+		if (begin3 == 3) { ai3s[3] ++; }
+		if (begin3 == 4) { ai3s[4] ++; }
+		if (begin3 == 5) { ai3s[5] ++; }
+		if (begin3 == 6) { ai3s[6] ++; }
+		if (begin3 == 7) { ai3s[7] ++; }
+
+	} // 4 players gets a random and different color card in the beginning 
+	cardgroup[a] = -1;
+	cardgroup[b] = -1;
+	cardgroup[c] = -1;
+	cardgroup[d] = -1;
+	totalcard = totalcard - 4;
+	cout << "Start!" << endl;
+	cout << "There are " << totalcard << " cards." << endl;
+	cout << "  Your card: Red: " << yours[1] << " Yellow: " << yours[2] << " Pink: " << yours[3] << " Gray: " << yours[4] << " Green: " << yours[5] << " Brown: " << yours[6] << " Blue: " << yours[7] << " +2: " << yours[8] << " Rainbow " << yours[9] << endl;
+	cout << " AI1's card: Red: " << ai1s[1] << " Yellow: " << ai1s[2] << " Pink: " << ai1s[3] << " Gray: " << ai1s[4] << " Green: " << ai1s[5] << " Brown: " << ai1s[6] << " Blue: " << ai1s[7] << " +2: " << ai1s[8] << " Rainbow " << ai1s[9] << endl;
+	cout << " AI2's card: Red: " << ai2s[1] << " Yellow: " << ai2s[2] << " Pink: " << ai2s[3] << " Gray: " << ai2s[4] << " Green: " << ai2s[5] << " Brown: " << ai2s[6] << " Blue: " << ai2s[7] << " +2: " << ai2s[8] << " Rainbow " << ai2s[9] << endl;
+	cout << " AI3's card: Red: " << ai3s[1] << " Yellow: " << ai3s[2] << " Pink: " << ai3s[3] << " Gray: " << ai3s[4] << " Green: " << ai3s[5] << " Brown: " << ai3s[6] << " Blue: " << ai3s[7] << " +2: " << ai3s[8] << " Rainbow " << ai3s[9] << endl;
+	cout << endl;
+
+	srand(time(0));
+	firstone = rand() % 4;
+
+	while (gamestatus == 0)
+	{
+
+		if (firstone == 0)
+		{
+			order1(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+		}
+		else if (firstone == 1)
+		{
+			order2(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+		}
+		else if (firstone == 2)
+		{
+			order3(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+		}
+		else if (firstone == 3)
+		{
+			order4(firstone, totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s, cardgroup, end, youfinish, ai1finish, ai2finish, ai3finish, take, e, gamestatus, t, put, get, g);
+		}
+
+		if (youfinish == 1 && ai1finish == 1 && ai2finish == 1 && ai3finish == 1) //start a new round
+		{
+			youfinish = 0;
+			ai1finish = 0;
+			ai2finish = 0;
+			ai3finish = 0;
+
+			for (int i = 0; i < 3; i++) //make lines empty
+			{
+				line1[i] = 0;
+				line2[i] = 0;
+				line3[i] = 0;
+				line4[i] = 0;
+			}
+
+			if (end == 1) //the card to make the game over be flipped
+			{
+				table(totalcard, line1, line2, line3, line4, yours, ai1s, ai2s, ai3s);
+				gamestatus = 1; //the game will end in this round
+
+				//calculate the score
+				for (int i = 0; i < yours[9]; i++)
+				{
+					max = yours[1];
+					winner = 1;
+					for (int j = 2; j <= 7; j++)
+					{
+						if (max < yours[j])
+						{
+							if (yours[j] >= 6)
+							{
+								continue;
+							}
+
+							else
+							{
+								max = yours[j];
+								winner = j;
+							}
+						}
+					}
+
+					yours[winner]++;
+				}
+
+				for (int i = 1; i <= 7; i++)
+				{
+					point[i] = 0;
+				}
+
+				for (int i = 1; i <= 7; i++)
+				{
+					if (yours[i] == 0) { point[i] = 0; }
+					if (yours[i] == 1) { point[i] = 1; }
+					if (yours[i] == 2) { point[i] = 3; }
+					if (yours[i] == 3) { point[i] = 6; }
+					if (yours[i] == 4) { point[i] = 10; }
+					if (yours[i] == 5) { point[i] = 15; }
+					if (yours[i] == 6) { point[i] = 21; }
+					if (yours[i] == 7) { point[i] = 21; }
+					if (yours[i] == 8) { point[i] = 21; }
+					if (yours[i] == 9) { point[i] = 21; }
+				} //the number of cards to the related score
+
+				for (int i = 0; i < 3; i++)
+				{
+					max = point[1];
+					winner = 1;
+
+					for (int j = 2; j <= 7; j++)
+					{
+						if (max < point[j])
+						{
+							max = point[j];
+							winner = j;
+						}
+					}
+
+					point[winner] = -1 * point[winner];
+				}
+
+				point[8] = 2 * yours[8]; //+2 * how many +2 cards
+				score = -1 * (point[1] + point[2] + point[3] + point[4] + point[5] + point[6] + point[7]) + point[8];
+				cout << "Game over!" << endl;
+
+				cout << "Your score: " << score << endl;
+
+				for (int i = 0; i < ai1s[9]; i++)
+				{
+					max = ai1s[1];
+					winner = 1;
+					for (int j = 2; j <= 7; j++)
+					{
+						if (max < ai1s[j])
+						{
+							if (ai1s[j] >= 6)
+							{
+								continue;
+							}
+
+							else
+							{
+								max = ai1s[j];
+								winner = j;
+							}
+						}
+					}
+
+					ai1s[winner]++;
+				}
+
+				for (int i = 1; i <= 7; i++)
+				{
+					point[i] = 0;
+				}
+
+				for (int i = 1; i <= 7; i++)
+				{
+					if (ai1s[i] == 0) { point[i] = 0; }
+					if (ai1s[i] == 1) { point[i] = 1; }
+					if (ai1s[i] == 2) { point[i] = 3; }
+					if (ai1s[i] == 3) { point[i] = 6; }
+					if (ai1s[i] == 4) { point[i] = 10; }
+					if (ai1s[i] == 5) { point[i] = 15; }
+					if (ai1s[i] == 6) { point[i] = 21; }
+					if (ai1s[i] == 7) { point[i] = 21; }
+					if (ai1s[i] == 8) { point[i] = 21; }
+					if (ai1s[i] == 9) { point[i] = 21; }
+				}
+
+				for (int i = 0; i < 3; i++)
+				{
+					max = point[1];
+					winner = 1;
+
+					for (int j = 2; j <= 7; j++)
+					{
+						if (max < point[j])
+						{
+							max = point[j];
+							winner = j;
+						}
+					}
+
+					point[winner] = -1 * point[winner];
+				}
+
+				point[8] = 2 * ai1s[8];
+				score = -1 * (point[1] + point[2] + point[3] + point[4] + point[5] + point[6] + point[7]) + point[8];
+
+				cout << "AI1's score: " << score << endl;
+
+				for (int i = 0; i < ai2s[9]; i++)
+				{
+					max = ai2s[1];
+					winner = 1;
+					for (int j = 2; j <= 7; j++)
+					{
+						if (max < ai2s[j])
+						{
+							if (ai2s[j] >= 6)
+							{
+								continue;
+							}
+
+							else
+							{
+								max = ai2s[j];
+								winner = j;
+							}
+						}
+					}
+
+					ai2s[winner]++;
+				}
+
+				for (int i = 1; i <= 7; i++)
+				{
+					point[i] = 0;
+				}
+
+				for (int i = 1; i <= 7; i++)
+				{
+					if (ai2s[i] == 0) { point[i] = 0; }
+					if (ai2s[i] == 1) { point[i] = 1; }
+					if (ai2s[i] == 2) { point[i] = 3; }
+					if (ai2s[i] == 3) { point[i] = 6; }
+					if (ai2s[i] == 4) { point[i] = 10; }
+					if (ai2s[i] == 5) { point[i] = 15; }
+					if (ai2s[i] == 6) { point[i] = 21; }
+					if (ai2s[i] == 7) { point[i] = 21; }
+					if (ai2s[i] == 8) { point[i] = 21; }
+					if (ai2s[i] == 9) { point[i] = 21; }
+				}
+
+				for (int i = 0; i < 3; i++)
+				{
+					max = point[1];
+					winner = 1;
+
+					for (int j = 2; j <= 7; j++)
+					{
+						if (max < point[j])
+						{
+							max = point[j];
+							winner = j;
+						}
+					}
+
+					point[winner] = -1 * point[winner];
+				}
+
+				point[8] = 2 * ai2s[8];
+				score = -1 * (point[1] + point[2] + point[3] + point[4] + point[5] + point[6] + point[7]) + point[8];
+
+				cout << "AI2's score: " << score << endl;
+
+				for (int i = 0; i < ai3s[9]; i++)
+				{
+					max = ai3s[1];
+					winner = 1;
+					for (int j = 2; j <= 7; j++)
+					{
+						if (max < ai3s[j])
+						{
+							if (ai3s[j] >= 6)
+							{
+								continue;
+							}
+
+							else
+							{
+								max = ai3s[j];
+								winner = j;
+							}
+						}
+					}
+
+					ai3s[winner]++;
+				}
+
+				for (int i = 1; i <= 7; i++)
+				{
+					point[i] = 0;
+				}
+
+				for (int i = 1; i <= 7; i++)
+				{
+					if (ai3s[i] == 0) { point[i] = 0; }
+					if (ai3s[i] == 1) { point[i] = 1; }
+					if (ai3s[i] == 2) { point[i] = 3; }
+					if (ai3s[i] == 3) { point[i] = 6; }
+					if (ai3s[i] == 4) { point[i] = 10; }
+					if (ai3s[i] == 5) { point[i] = 15; }
+					if (ai3s[i] == 6) { point[i] = 21; }
+					if (ai3s[i] == 7) { point[i] = 21; }
+					if (ai3s[i] == 8) { point[i] = 21; }
+					if (ai3s[i] == 9) { point[i] = 21; }
+				}
+
+				for (int i = 0; i < 3; i++)
+				{
+					max = point[1];
+					winner = 1;
+
+					for (int j = 2; j <= 7; j++)
+					{
+						if (max < point[j])
+						{
+							max = point[j];
+							winner = j;
+						}
+					}
+
+					point[winner] = -1 * point[winner];
+				}
+
+				point[8] = 2 * ai3s[8];
+				score = -1 * (point[1] + point[2] + point[3] + point[4] + point[5] + point[6] + point[7]) + point[8];
+
+				cout << "AI3's score: " << score << endl;
+			}
+			else
+			{
+				cout << endl << "Next round." << endl;
+			}
+		}
+	}
+
+	system("pause");
+	return 0;
+}
